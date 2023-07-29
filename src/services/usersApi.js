@@ -8,3 +8,8 @@ export const fetchUsers = async () => {
   const { data } = await instance.get("/users");
   return data;
 };
+
+export const updateUser = async ({ id, followers }) => {
+  const { data } = await instance.put(`/users/${id}`, { followers });
+  return data;
+};
