@@ -1,19 +1,32 @@
 import PropTypes from "prop-types";
 import logo from "../../images/sprite.svg";
-import { ListItem } from "./tweetListItem.styled";
+import bgImage from "../../images/bgImage.webp";
+import {
+  Avatar,
+  BgImage,
+  BtnFollow,
+  Ellipse,
+  ListItem,
+  LogoGoIT,
+  Rectangle,
+  TextFollowers,
+  TextTweets,
+} from "./tweetListItem.styled";
 
 export const TweetListItem = ({ user, tweets, followers, avatar }) => {
   return (
     <ListItem>
-      <svg width="76px" height="22px">
+      <LogoGoIT width="76px" height="22px">
         <use href={logo + "#GoITLogo"}></use>
-      </svg>
-      <img src="" alt="" />
-      <span></span>
-      <img src={avatar} alt={user} />
-      <p>{tweets} Tweets</p>
-      <p>{followers} Followers</p>
-      <button>Follow</button>
+      </LogoGoIT>
+      <BgImage src={bgImage} alt="chats" />
+      <Rectangle></Rectangle>
+      <Ellipse>
+        <Avatar src={avatar} alt={user} />
+      </Ellipse>
+      <TextTweets>{tweets} Tweets</TextTweets>
+      <TextFollowers>{followers} Followers</TextFollowers>
+      <BtnFollow>Follow</BtnFollow>
     </ListItem>
   );
 };

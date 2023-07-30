@@ -2,6 +2,11 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getUsersThunk } from "../redux/usersThunk";
 import { TweetsList } from "../components/TweetsList/TweetsList";
+import {
+  BtnLoadMore,
+  LinkGoBack,
+  MainWrapper,
+} from "./pagesStyles/tweets.styled";
 
 const Tweets = () => {
   const dispatch = useDispatch();
@@ -11,11 +16,11 @@ const Tweets = () => {
   }, [dispatch]);
 
   return (
-    <div>
-      <button>Back</button>
+    <MainWrapper>
+      <LinkGoBack to="/">Back</LinkGoBack>
       <TweetsList />
-      <button>Load More</button>
-    </div>
+      <BtnLoadMore type="button">Load More</BtnLoadMore>
+    </MainWrapper>
   );
 };
 

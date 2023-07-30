@@ -4,6 +4,10 @@ export default createGlobalStyle`
 body {
   font-family: 'Montserrat', sans-serif;
   line-height: 1.5;
+  margin: 0;
+  background: linear-gradient(to right, #be93c5, #7bc6cc);
+ height: 100vh;
+
 }
 
 h1,
@@ -31,6 +35,10 @@ img {
 
 a {
   text-decoration: none;
+}
+
+button {
+  cursor: pointer;
 }
 
   `;

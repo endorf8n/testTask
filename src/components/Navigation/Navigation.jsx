@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLinkStyled, NavListStyle } from "./navigation.styled";
 
 const routes = [
   { path: "/", text: "Home" },
@@ -8,13 +8,13 @@ const routes = [
 export const Navigation = () => {
   return (
     <nav>
-      <ul>
+      <NavListStyle>
         {routes.map((route) => (
           <li key={route.path}>
-            <NavLink to={route.path}>{route.text}</NavLink>
+            <NavLinkStyled to={route.path}>{route.text}</NavLinkStyled>
           </li>
         ))}
-      </ul>
+      </NavListStyle>
     </nav>
   );
 };

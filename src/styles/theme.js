@@ -2,7 +2,7 @@ export const theme = Object.freeze({
   colors: {
     mainTextColor: "#EBD8FF",
     accentColor: "#5CD3A8",
-    secondaryTextColor: "373737",
+    secondaryTextColor: "#373737",
     background:
       "linear-gradient(142deg, #471CA9 0%, #5736A3 69.10%, #4B2A99 100%)",
   },
@@ -10,6 +10,7 @@ export const theme = Object.freeze({
     small: "14px",
     regular: "18px",
     medium: "20px",
+    big: "26px",
     large: "56px",
   },
   shadows: {
