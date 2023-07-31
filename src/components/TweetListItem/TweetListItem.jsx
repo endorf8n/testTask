@@ -12,8 +12,32 @@ import {
   TextFollowers,
   TextTweets,
 } from "./tweetListItem.styled";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { updateUserThunk } from "../../redux/usersThunk";
 
-export const TweetListItem = ({ user, tweets, followers, avatar }) => {
+export const TweetListItem = ({ id, user, tweets, followers, avatar }) => {
+  const dispatch = useDispatch();
+
+  const [isFollowing, setIsFollowing] = useState(false);
+  const [followersCount, setFollowersCount] = useState(followers);
+
+  const handleBtnClick = () => {
+    if (isFollowing) {
+      setFollowersCount((prev) => prev - 1);
+      setIsFollowing(false);
+    } else {
+      setFollowersCount((prev) => prev + 1);
+      setIsFollowing(true);
+    }
+
+    const updateFollowersCount = isFollowing
+      ? followersCount - 1
+      : followersCount + 1;
+    dispatch(updateUserThunk({ id, followers: updateFollowersCount }));
+    console.log(updateFollowersCount);
+  };
+
   return (
     <ListItem>
       <LogoGoIT width="76px" height="22px">
@@ -25,14 +49,21 @@ export const TweetListItem = ({ user, tweets, followers, avatar }) => {
         <Avatar src={avatar} alt={user} />
       </Ellipse>
       <TextTweets>{tweets} Tweets</TextTweets>
-      <TextFollowers>{followers} Followers</TextFollowers>
-      <BtnFollow>Follow</BtnFollow>
+      <TextFollowers>
+        {followersCount.toLocaleString("en-US")} Followers
+      </TextFollowers>
+      <BtnFollow
+        onClick={handleBtnClick}
+        style={{ backgroundColor: isFollowing ? "#5CD3A8" : "#EBD8FF" }}
+      >
+        {isFollowing ? "Following" : "Follow"}
+      </BtnFollow>
     </ListItem>
   );
 };
 
 TweetListItem.propTypes = {
-  // id: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
   user: PropTypes.string.isRequired,
   tweets: PropTypes.number.isRequired,
   followers: PropTypes.number.isRequired,
