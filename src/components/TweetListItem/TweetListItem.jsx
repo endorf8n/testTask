@@ -12,30 +12,41 @@ import {
   TextFollowers,
   TextTweets,
 } from "./tweetListItem.styled";
-import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { updateUserThunk } from "../../redux/usersThunk";
+import { getUsersThunk, updateUserThunk } from "../../redux/usersThunk";
 
-export const TweetListItem = ({ id, user, tweets, followers, avatar }) => {
+export const TweetListItem = ({
+  id,
+  user,
+  tweets,
+  followers,
+  avatar,
+  isFollowed = false,
+}) => {
   const dispatch = useDispatch();
 
-  const [isFollowing, setIsFollowing] = useState(false);
-  const [followersCount, setFollowersCount] = useState(followers);
-
-  const handleBtnClick = () => {
-    if (isFollowing) {
-      setFollowersCount((prev) => prev - 1);
-      setIsFollowing(false);
+  const handleBtnClick = (id, followers, isFollowed) => {
+    if (isFollowed) {
+      dispatch(
+        updateUserThunk({
+          id,
+          user: {
+            isFollowed: false,
+            followers: followers - 1,
+          },
+        })
+      ).then(() => dispatch(getUsersThunk()));
     } else {
-      setFollowersCount((prev) => prev + 1);
-      setIsFollowing(true);
+      dispatch(
+        updateUserThunk({
+          id,
+          user: {
+            isFollowed: true,
+            followers: followers + 1,
+          },
+        })
+      ).then(() => dispatch(getUsersThunk()));
     }
-
-    const updateFollowersCount = isFollowing
-      ? followersCount - 1
-      : followersCount + 1;
-    dispatch(updateUserThunk({ id, followers: updateFollowersCount }));
-    console.log(updateFollowersCount);
   };
 
   return (
@@ -50,19 +61,22 @@ export const TweetListItem = ({ id, user, tweets, followers, avatar }) => {
       </Ellipse>
       <TextTweets>{tweets} Tweets</TextTweets>
       <TextFollowers>
-        {followersCount.toLocaleString("en-US")} Followers
+        {followers.toLocaleString("en-US")} Followers
       </TextFollowers>
       <BtnFollow
-        onClick={handleBtnClick}
-        style={{ backgroundColor: isFollowing ? "#5CD3A8" : "#EBD8FF" }}
+        onClick={() => {
+          handleBtnClick(id, followers, isFollowed);
+        }}
+        style={{ backgroundColor: isFollowed ? "#5CD3A8" : "#EBD8FF" }}
       >
-        {isFollowing ? "Following" : "Follow"}
+        {isFollowed ? "Following" : "Follow"}
       </BtnFollow>
     </ListItem>
   );
 };
 
 TweetListItem.propTypes = {
+  isFollowed: PropTypes.bool,
   id: PropTypes.string.isRequired,
   user: PropTypes.string.isRequired,
   tweets: PropTypes.number.isRequired,

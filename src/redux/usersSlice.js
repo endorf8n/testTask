@@ -26,9 +26,10 @@ const usersSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(updateUserThunk.fulfilled, (state, { payload }) => {
-        state.users = state.users.map((user) => {
-          return user.id === payload.id ? payload : user;
-        });
+        // state.users = state.users.map((user) => {
+        //   return user.id === payload.id ? payload : user;
+        // });
+        state.users.push(payload);
         state.isLoading = false;
       })
       .addMatcher(

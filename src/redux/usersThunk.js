@@ -15,9 +15,9 @@ export const getUsersThunk = createAsyncThunk(
 
 export const updateUserThunk = createAsyncThunk(
   "users/updateUser",
-  async ({ id, followers }, { rejectWithValue }) => {
+  async ({ id, user }, { rejectWithValue }) => {
     try {
-      const response = await updateUser({ id, followers });
+      const response = await updateUser({ id, user });
       return response;
     } catch (e) {
       return rejectWithValue(e.message);
