@@ -9,6 +9,13 @@ export const MainWrapper = styled.div`
   text-align: center;
 `;
 
+export const MiniWrapper = styled.div`
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+`;
+
 export const BtnLoadMore = styled(BtnFollow)`
   margin-top: 20px;
   margin-bottom: 20px;
@@ -22,7 +29,6 @@ export const BtnLoadMore = styled(BtnFollow)`
 
 export const LinkGoBack = styled(Link)`
   display: block;
-  margin: 0 auto;
   width: 160px;
   margin-top: 24px;
   margin-bottom: 24px;

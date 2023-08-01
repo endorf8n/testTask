@@ -6,13 +6,15 @@ import {
   BtnLoadMore,
   LinkGoBack,
   MainWrapper,
+  MiniWrapper,
 } from "./pagesStyles/tweets.styled";
-import { selectUser } from "../redux/selectors";
+import { selectFilteredUsers } from "../redux/selectors";
 import { scrollOnBtnClick } from "../services/scrollOnBtnClick";
+import { Filter } from "../components/Filter/Filter";
 
 const Tweets = () => {
   const dispatch = useDispatch();
-  const users = useSelector(selectUser);
+  const filteredUsers = useSelector(selectFilteredUsers);
   const [numberOfTweets, setNumberOfTweets] = useState(3);
 
   useEffect(() => {
@@ -24,12 +26,15 @@ const Tweets = () => {
     scrollOnBtnClick();
   };
 
-  const visibleTweets = users.slice(0, numberOfTweets);
-  const isBtnLoadMoreShow = visibleTweets.length !== users.length;
+  const visibleTweets = filteredUsers.slice(0, numberOfTweets);
+  const isBtnLoadMoreShow = visibleTweets.length !== filteredUsers.length;
 
   return (
     <MainWrapper>
-      <LinkGoBack to="/">Back</LinkGoBack>
+      <MiniWrapper>
+        <LinkGoBack to="/">Back</LinkGoBack>
+        <Filter />
+      </MiniWrapper>
       <TweetsList users={visibleTweets} />
       {isBtnLoadMoreShow && (
         <BtnLoadMore type="button" onClick={handleBtnLoadMore}>
