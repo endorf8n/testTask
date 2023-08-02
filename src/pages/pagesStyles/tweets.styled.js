@@ -3,17 +3,34 @@ import { BtnFollow } from "../../components/TweetListItem/tweetListItem.styled";
 import { Link } from "react-router-dom";
 
 export const MainWrapper = styled.div`
-  padding-left: 24px;
-  padding-right: 24px;
+  padding-left: 10px;
+  padding-right: 10px;
   margin: 0 auto;
   text-align: center;
+
+  @media only screen and (min-width: 768px) {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
 `;
 
 export const MiniWrapper = styled.div`
   display: flex;
-  gap: 20px;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-bottom: 20px;
+
+  @media only screen and (min-width: 768px) {
+    width: 768px;
+    margin: 0 auto;
+    flex-direction: row;
+    gap: 20px;
+  }
+
+  @media only screen and (min-width: 1280px) {
+    width: 1280px;
+  }
 `;
 
 export const BtnLoadMore = styled(BtnFollow)`
