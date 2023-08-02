@@ -64,6 +64,7 @@ export const TweetListItem = ({
         {followers.toLocaleString("en-US")} Followers
       </TextFollowers>
       <BtnFollow
+        type="button"
         onClick={() => {
           handleBtnClick(id, followers, isFollowed);
         }}
